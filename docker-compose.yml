@@ -214,12 +214,18 @@ services:
       - ${HOST_FOLDER}:${HOST_FOLDER}:z
       - /sys/fs/cgroup
       - ${EOS_FOLDER}:/eos:shared
-      - /mnt_pool/ciencias:/pool/ciencias:ro
-      - /mnt_pool/phedex:/pool/phedex:ro
+      - type: bind
+        source: /mnt_pool/ciencias
+        target: /pool/ciencias
+        read_only: true
+      - type: bind
+        source: /mnt_pool/phedex
+        target: /pool/phedex
+        read_only: true
     env_file:
       - .env
 
-
+#### WARNING: ANYADIR LOS VOLS ESTOS COMO EXTERNOS, TAL COMO ESTA NO VA.
 
 # NETWORKS
 networks:
