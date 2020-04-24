@@ -11,7 +11,7 @@ export SWAN_HTTPS_PORT=8443
 export WEBDAV_CLIENT_CERT_PORT=4443
 
 # Temporary work folder on the host
-export HOST_FOLDER="/tmp/sciencebox"
+export HOST_FOLDER="/sciencebox"
 export EOS_FOLDER=$HOST_FOLDER"/eos_mount"
 export EOS_MOUNT=$EOS_FOLDER"/docker"
 export CVMFS_FOLDER=$HOST_FOLDER"/cvmfs_mount"
