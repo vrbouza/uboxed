@@ -132,8 +132,8 @@ services:
   #--- CERNBox ---#
   # Web User Interface (httpd, php, sqlite)
   cernbox:
-    image: gitlab-registry.cern.ch/cernbox/boxedhub/cernbox:v1.4
-    #image: gitlab-registry.cern.ch/cernbox/boxedhub/cernbox:v1.7
+    #image: gitlab-registry.cern.ch/cernbox/boxedhub/cernbox:v1.4
+    image: gitlab-registry.cern.ch/cernbox/boxedhub/cernbox:v1.7
     container_name: cernbox
     hostname: cernbox
     domainname: demonet
@@ -200,6 +200,7 @@ services:
   # EOS-Fuse: Access to EOS storage (same as CERNBox)
   eos-fuse:
     image: gitlab-registry.cern.ch/cernbox/boxedhub/eos-fuse:v0.8
+    #image: eos-fuse-conmonturas
     container_name: eos-fuse
     hostname: eos-fuse
     domainname: demonet
@@ -214,14 +215,7 @@ services:
       - ${HOST_FOLDER}:${HOST_FOLDER}:z
       - /sys/fs/cgroup
       - ${EOS_FOLDER}:/eos:shared
-      - type: bind
-        source: /mnt_pool/ciencias
-        target: /pool/ciencias
-        read_only: true
-      - type: bind
-        source: /mnt_pool/phedex
-        target: /pool/phedex
-        read_only: true
+      - /mnt_pool/ciencias/opendata:/opt:ro
     env_file:
       - .env
 
