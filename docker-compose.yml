@@ -173,13 +173,15 @@ services:
   # Jupyterhub: User authentication and session management
   jupyterhub:
     #image: gitlab-registry.cern.ch/swan/docker-images/jupyterhub:v1.9
-    image: /root/jupyterhub
+    build: /root/jupyterhub/
     container_name: jupyterhub
     ports:
       - ${SWAN_HTTPS_PORT}:443
     volumes:
       - ${HOST_FOLDER}:${HOST_FOLDER}:z
       - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /mnt_pool/ciencias:/pool/ciencias:ro
+      - /mnt_pool/phedex:/pool/phedex:ro
     env_file:
       - .env
 
@@ -212,12 +214,10 @@ services:
     pid: host
     security_opt:
       - apparmor=unconfined
-    command: mkdir /pool/ciencias; mkdir /pool/phedex
     volumes:
       - ${HOST_FOLDER}:${HOST_FOLDER}:z
       - /sys/fs/cgroup
       - ${EOS_FOLDER}:/eos:shared
-      - /mnt_pool/ciencias/opendata:/opt:ro
       - /mnt_pool/ciencias:/pool/ciencias:ro
       - /mnt_pool/phedex:/pool/phedex:ro
     env_file:
